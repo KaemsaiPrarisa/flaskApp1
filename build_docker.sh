@@ -1,8 +1,7 @@
 #!/bin/sh
 app="docker.test"
 docker build -t ${app} .
-docker run -d ${app} -p 56733:8000 \
+docker run -p 56733:8000 -d \
   --name=${app} \
-  -v $PWD:/app
-
+  -v $PWD:/app ${app}
 
