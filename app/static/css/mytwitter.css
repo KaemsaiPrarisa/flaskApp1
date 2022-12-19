@@ -1,0 +1,198 @@
+
+body {
+    background-color: #e7ecf0;
+}
+ 
+nav {
+    background-color: #ffffff;
+    border-bottom: 1px solid #adb1b4;
+    margin-bottom: 10px;
+}
+img.tw-logo{
+    height: 35px;
+}
+img.tw-user-small {
+    height: 40px;
+}
+img.tw-user-small1 {
+    height: 65px;
+}
+
+img.tw-user-medium {
+    height: 50px;
+}
+ 
+#nav-search {
+    border-radius: 20px;
+    background-color: #e7ecf0
+}
+ 
+#nav-tweet-btn {
+    border-radius: 20px;
+    background-color: #67b1f9;
+    color: #ffffff;
+}
+
+.content-box {
+    
+    margin-bottom: 20px;
+    background: #ffffff none repeat scroll 0 0;
+    border: 1px solid #e1e8ed;
+    border-radius: 6px;
+    
+}
+
+.new-tweet-row {
+    background-color: #eaf5fe;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.tweet {
+    background-color: #ffffff;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #edf1f4;
+}
+ 
+.tweet-username {
+    font-weight: bold;
+}
+ 
+.tweet-arrow {
+    padding-right: 25px;
+}
+
+ 
+.tweet-text,
+.tweet-media {
+    padding-right: 10px;
+}
+.profile{
+    background: #ffffff none repeat scroll 0 0;
+    border: 1px solid #e1e8ed;
+    border-radius: 6px;
+    height: auto;
+    width: 100%;
+    max-width: 340px;
+    margin-bottom: 10px;
+
+}
+.profile-bg{
+    background-image: url("https://digitalagemag.com/wp-content/uploads/2019/04/Guide-to-Branding-Your-Business-on-Twitter.png");
+    background-position: 0 50%;
+    background-size: 100% auto;
+    border-radius: 4px 4px 0px 0px;
+    height: 95px;
+    width: 100%;
+}
+.profile-link{
+    
+    border-radius: 6px;
+    display: inline-block;
+    float: left;
+    margin: -30px 5px 0px 8px;
+    max-width: 100%;
+    padding: 1px;
+    vertical-align: bottom;
+}
+.profile-pic{
+    border: 2px solid #ffffff;
+    border-radius: 7px;
+    color: #ffffff;
+    height: 90px;
+    width: 90px;
+}
+.profile-marg{
+    margin: 5px 0px 0px;
+}
+.profile-name{
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 21px;
+}
+.profile-state{
+    padding: 15px;
+}
+.profile-arrange{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0;
+    min-width: 100%;
+    padding: 0px;
+}
+ul.profile-arrange{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.profile-details a:hover{
+    text-decoration: none;
+}
+.profile-number{
+    display: block;
+    font-size: 18px;
+    font-weight: 500;
+    transition: color 0.15s ease-in-out 0s;
+}
+.profile-label{
+    color: #3e4143;
+    font-size: 10px;
+    letter-spacing: 0.02em;
+    overflow: hidden;
+    text-transform: uppercase;
+}
+.name{
+    color: #3e4143;
+    background-color: transparent;
+    text-decoration: none;
+}
+.trends-marg{
+    
+    margin-left: 10px;
+    margin-right: 10px;
+   
+}
+.trends-name{
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 21px;
+}
+.trend-country{
+    list-style: none;
+    padding-left: 1px;
+    margin-left: -30px;
+    margin-top: 15px;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+ul.change li{
+    
+    float: left;
+    padding: 0;
+    
+}
+.c{
+    color: #67b1f9;
+    margin-left: 20px;
+    margin-top: 21px;
+    font-size: 10px;
+}
+.t{
+    font-size: 15px;
+    background-color: transparent;
+    text-decoration: none;
+    
+}
+.t1{
+    font-size: 14px;
+    color: #565859;
+    background-color: transparent;
+    text-decoration: none;
+}
+
+
+
+
