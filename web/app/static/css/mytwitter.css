@@ -192,7 +192,24 @@ ul.change li{
     background-color: transparent;
     text-decoration: none;
 }
-
-
+.add-tweet{
+    color: #3e4143;
+}
+input[type=text],
+input[type=tel],
+select,
+textarea {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-sizing: border-box;
+    margin-top: 6px;
+    margin-bottom: 16px;
+    resize: vertical;
+}
+label{
+    width: 100px;
+}
 
 
