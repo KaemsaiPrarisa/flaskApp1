@@ -196,7 +196,7 @@ ul.change li{
     color: #3e4143;
 }
 input[type=text],
-input[type=tel],
+input[type=email],
 select,
 textarea {
     width: 100%;
@@ -211,5 +211,70 @@ textarea {
 label{
     width: 100px;
 }
+button {
+    border-radius: 20px;
+    border: #ffffff;
+    background-color: #FFB6C1;
+    color: #ffffff;
+    padding: 10px;
+    margin-left: 10px;
+    width: 100px;
+    
+}
+
+
+input[type=submit]{
+    border-radius: 20px;
+    border:#ffffff;
+    background-color: #FFB6C1;
+    color: #ffffff;
+    padding: 10px;
+    width: 100px;
+    
+    
+}
+.new-tweet{
+    margin-top: 10px;
+}
+button[id=edit] {
+    margin-top: 10px;
+    margin-right: 10px;
+    background-color: #aedfe5;
+    width: 50px;
+    padding-right: 10px;
+}
+button[id=remove] {
+    margin-top: 10px;
+    margin-right: 10px;
+    background-color: #99eab8;
+    width: 50px;
+    padding-right: 10px;
+    float: left;
+}
+button[id=like] {
+    margin-top: 10px;
+    margin-right: 10px;
+    background-color: #e1aee5;
+    width: 50px;
+    padding-right: 10px;
+    float: left;
+}
+button[id=retweet] {
+    margin-top: 10px;
+    margin-right: 10px;
+    background-color: #ffd966;
+    width: 50px;
+    padding-right: 10px;
+    float: left;
+}
+
+button[id=new-tweet]{
+    background-color: #FFB6C1;
+    
+}
+.remove{
+    padding-right: 25px;
+}
+
 
 

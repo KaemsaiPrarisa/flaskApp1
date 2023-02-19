@@ -19,9 +19,8 @@
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.3.js"
+        integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
         integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
         crossorigin="anonymous"></script>
@@ -166,135 +165,33 @@
 
             <div id="center_6" class="col-md-6">
                 <div class="content-box">
-
                     <div class="new-tweet-row">
                         <div class="row">
-                            <h2 id="add-tweet">Add new tweet</h2>
                             <div class="col-md-2">
                                 <img src="static/img/kuromii.jpg" class="tw-user-small rounded-circle mx-auto d-block">
                             </div>
                             <div class="col-md-9">
-                                
-                                <form>
-                                    
-                                    <input id="tweet-input" class="form-control" type="text"
-                                        placeholder="Whats happening?">
-                                    <button class="btn1" id="tweet-btn" type="submit">Tweet</button>
+
+                                <form id="addNewTweet" hidden="hidden">
+                                    <h3 class="tweets" id="add-tweet">Add new tweet</h3>
+                                    <label for="name">Name</label>
+                                    <input type="text" id="name" name="name" placeholder="Your name...">
+                                    <label for="message">Message</label>
+                                    <textarea id="message" name="message" placeholder="Type your message..."></textarea>
+                                    <label for="email">Email</label>
+                                    <input type="email" id="mail" name="email" placeholder="Your email...">
+                                    <input type="hidden" id="entryid" name="id" value="">
+                                    <input type="submit" id="submit" name="submit" value="Tweet">
+                                    <button id="clear" type="button">Clear</button>
+                                    <button id="cancel" type="button">Cancel</button>
                                 </form>
-
+                                <button id="new-tweet" type="button">+ Tweet</button>
                             </div>
-
                         </div>
                     </div>
-                    <div class="tweet">
-                        <div class="row">
-                            <div class="col-md-2 text-center">
-                                <img class="tw-user-medium rounded-circle" src="static/img/kuromii.jpg">
-                            </div>
-
-                            <div class="col-md-10">
-                                <div class="row tweet-info">
-                                    <div class="col-md-auto">
-                                        <span class="tweet-username">Kaemsai Prarisa</span>
-                                        <span class="tweet-usertag text-muted">@ksprarisa</span>-
-                                        <span class="tweet-age text-muted">4h</span>
-                                    </div>
-                                    <div class="col tweet-arrow text-muted">
-                                        <span class="oi oi-arrow-thick-bottom float-right"></span>
-                                    </div>
-                                </div>
-
-                                <div class="tweet-text">
-                                    Hamsters like to run all night long, keeping
-                                    you awake!!!
-                                </div>
-                                <div class="tweet-media">
-                                    <img class="img-fluid rounded" src="static/img/hamster-on-a-wheel.jpg">
-                                </div>
-
-                                <div class="row text-muted">
-                                    <div class="col-md-2"><span class="oi oi-bullhorn"></span></div>
-                                    <div class="col-md-2"><span class="oi oi-loop-circular"></span></div>
-                                    <div class="col-md-2"><span class="oi oi-heart"></span></div>
-                                    <div class="col-md-2"><span class="oi oi-envelope-open"></span></div>
-                                </div>
-
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="tweet">
-                        <div class="row">
-                            <div class="col-md-2 text-center">
-                                <img class="tw-user-medium rounded-circle" src="static/img/sport.jpg">
-                            </div>
-
-                            <div class="col-md-10">
-                                <div class="row tweet-info">
-                                    <div class="col-md-auto">
-                                        <span class="tweet-username">Revenant</span>
-                                        <span class="tweet-usertag text-muted">@HereHeIsAgain</span>-
-                                        <span class="tweet-age text-muted">1d</span>
-                                    </div>
-                                    <div class="col tweet-arrow text-muted">
-                                        <span class="oi oi-arrow-thick-bottom float-right"></span>
-                                    </div>
-                                </div>
-
-                                <div class="tweet-text">
-                                    Messi vs Ronaldo updated FIFA World Cup Stats after Semi Final game against Croatia.
-                                </div>
-                                <div class="tweet-media">
-                                    <img class="img-fluid rounded" src="static/img/messi-ronaldo.jpeg">
-                                </div>
-
-                                <div class="row text-muted">
-                                    <div class="col-md-2"><span class="oi oi-bullhorn"></span></div>
-                                    <div class="col-md-2"><span class="oi oi-loop-circular"></span></div>
-                                    <div class="col-md-2"><span class="oi oi-heart"></span></div>
-                                    <div class="col-md-2"><span class="oi oi-envelope-open"></span></div>
-                                </div>
-
-                            </div>
-
-                        </div>
-                    </div>
-
-                    <div class="tweet">
-                        <div class="row">
-                            <div class="col-md-2 text-center">
-                                <img class="tw-user-medium rounded-circle" src="static/img/catPro.jpg">
-                            </div>
-
-                            <div class="col-md-10">
-                                <div class="row tweet-info">
-                                    <div class="col-md-auto">
-                                        <span class="tweet-username">cats being weird little guys</span>
-                                        <span class="tweet-usertag text-muted">@weirdlilguys</span>-
-                                        <span class="tweet-age text-muted">3d</span>
-                                    </div>
-                                    <div class="col tweet-arrow text-muted">
-                                        <span class="oi oi-arrow-thick-bottom float-right"></span>
-                                    </div>
-                                </div>
-
-                                <div class="tweet-text">
-                                    what if barbie's dream wasn't the burden of home ownership.
-                                </div>
-                                <div class="tweet-media">
-                                    <img class="img-fluid rounded" src="static/img/cat.jpeg">
-                                </div>
-
-                                <div class="row text-muted">
-                                    <div class="col-md-2"><span class="oi oi-bullhorn"></span></div>
-                                    <div class="col-md-2"><span class="oi oi-loop-circular"></span></div>
-                                    <div class="col-md-2"><span class="oi oi-heart"></span></div>
-                                    <div class="col-md-2"><span class="oi oi-envelope-open"></span></div>
-                                </div>
-
-                            </div>
-
-                        </div>
+                    &nbsp;
+                    <div class="contentbox-box" id="demo">
+            
                     </div>
 
                 </div>
@@ -313,11 +210,163 @@
 
         </div>
     </div>
+</body>
 
 
-    </nav>
-    <!-- Optional JavaScript -->
+</nav>
+<!-- Optional JavaScript -->
+<script>
 
+    function populate_post(contact_data) {
+        console.log(contact_data);
+
+        let output = ``
+        contact_data.forEach( element => {console.log(element)
+            console.log(element)
+            console.log(element.id)
+
+            var date = new Date();
+            var offset = date.getTimezoneOffset();
+            const db_date = new Date((Date.parse(element.date_created) - (offset * 60 * 1000))).toLocaleString("th-TH")
+            var id = element.id
+            output += `
+            <div class="tweet">
+                <div class="row">
+                    <div class="col-md-2 text-center">
+                        <img class="tw-user-medium rounded-circle" src="static/img/kuromii.jpg">
+                    </div>
+
+                    <div class="col-md-10">
+                        <div class="row tweet-info">
+                            <div class="col-md-auto">
+                                <span class="tweet-username" id="username${id}">${element.name}</span>
+                                <span class="tweet-email" id="e_mail${id}">${element.email}</span>-
+                                <span class="tweet-age text-muted">${db_date}</span>
+                                <span class="tweet-id" hidden="hidden"></span>
+                            </div>
+                        </div>
+
+                        <div class="tweet-text" id="messages${id}">
+                            ${element.message}
+                        </div>
+                        <div class="row text-muted">
+                            
+                            <button id="retweet" type="button"><span class="oi oi-loop-circular"></span></botton>
+                            <button id="like" type="button">❤️</button>
+                            <button id="edit" type="button" onclick="prePopulateForm(${element.id})">✏️</button>
+                            <button id="remove" type="button" onclick="removeItem(${element.id})">🗑️</button>
+                            
+                            
+                        </div>
+                        
+                    </div>
+
+                </div>
+            </div>
+            `
+
+        });
+        document.getElementById("demo").innerHTML = output;
+    }
+
+    $(document).ready(function () {
+        (function () {
+            $.getJSON("lab11/blog", populate_post);
+        })();
+    });
+
+
+    $("#addNewTweet").submit(function (event) {
+        // prevent default html form submission action
+        event.preventDefault();
+
+
+        // pack the inputs into a dictionary
+        var formData = {};
+        $("#addNewTweet :input").each(function () {
+            var key = $(this).attr('name');
+            var val = $(this).val();
+
+
+            if (key != 'submit') {
+                formData[key] = val;
+            }
+        });
+
+
+        var $form = $(this);
+        var url = $form.attr("action");
+
+
+        // make a POST call to the back end w/ a callback to refresh the table
+        $.post(url, formData, function (contact_data) {
+            //refresh_table(contact_data);
+            populate_post(contact_data);
+            clearForm();
+        });
+        toggleView()
+    });
+
+    function toggleView() {
+        if ($('#addNewTweet').attr('hidden')) {
+            $('#addNewTweet').removeAttr('hidden');
+            $('#new-tweet').attr('hidden', 'hidden');
+        } else {
+            $('#addNewTweet').attr('hidden', 'hidden');
+            $('#new-tweet').removeAttr('hidden');
+        }
+    }
+    function clearForm() {
+        $('#addNewTweet')[0].reset();
+        $('#entryid').val('');
+    }
+
+    $("#new-tweet").click(function () {
+        clearForm();
+        toggleView();
+    });
+    $("#clear").click(function () {
+        clearForm();
+    });
+
+    $("#cancel").click(function () {
+        clearForm();
+        toggleView();
+    });
+    
+    
+
+
+    function prePopulateForm(id) {
+        console.log(id)
+        $('#addNewTweet')[0].reset();
+        $('#name').val(document.getElementById("username"+id).innerHTML);
+        $('#message').val(document.getElementById("messages"+id).innerHTML);
+        $('#mail').val(document.getElementById("e_mail"+id).innerHTML);
+        $('#entryid').val(id);
+        console.log(id)
+        
+        toggleView();
+
+    }
+
+
+
+    function removeItem(id) {
+        
+        if (!confirm("Delete " + '?')) {
+          return false;
+        }
+        var url = "/lab11/remove_blog"
+        var formData = { 'id': id };
+        $.post(url, formData, function (contact_data) {
+          populate_post(contact_data);
+        });
+      }
+
+
+
+</script>
 
 
 </html>

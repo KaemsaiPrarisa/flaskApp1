@@ -163,6 +163,7 @@
     }
 
     function removeItem(row) {
+        console.log(row)
         if (!confirm("Delete " + row.firstname + ' ' + row.lastname + '?')) {
             return false;
         }

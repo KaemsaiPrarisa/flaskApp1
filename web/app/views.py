@@ -6,6 +6,7 @@ from app import app
 from app import db
 from app.models.contact import Contact
 from app.models.blog import BlogEntry
+import datetime
 
 
 @app.route('/')
@@ -76,8 +77,6 @@ def lab10_phonebook():
     return app.send_static_file('lab10_phonebook.html')
 
 
-
-
 @app.route("/lab10/contacts")
 def lab10_db_contacts():
     contacts = []
@@ -90,8 +89,58 @@ def lab10_db_contacts():
 
     return jsonify(contacts)
 
-@app.route("/lab04/blog")
-def lab04_db_blog():
+@app.route('/lab11')
+def lab11_microblog():
+    return app.send_static_file('lab11_microblog.html')
+
+
+
+@app.route('/lab11', methods=('GET', 'POST'))
+def lab11_microblogs():
+    if request.method == 'POST':
+        result = request.form.to_dict()
+        app.logger.debug(str(result))
+        id_ = result.get('id', '')
+        validated = True
+        validated_dict = dict()
+        valid_keys = ['name', 'message', 'email']
+    
+        # validate the input
+        for key in result:
+            app.logger.debug(f"{key}, {result[key]}")
+            # screen of unrelated inputs
+            if key not in valid_keys:
+                continue
+
+
+            value = result[key].strip()
+            if not value or value == 'undefined':
+                validated = False
+                break
+            validated_dict[key] = value
+
+
+        if validated:
+            app.logger.debug('validated dict: ' + str(validated_dict))
+            # if there is no id: create a new contact entry
+            if not id_:
+                entry = BlogEntry(**validated_dict)
+                app.logger.debug(str(entry))
+                db.session.add(entry)
+            # if there is an id already: update the contact entry
+            else:
+                blog = BlogEntry.query.get(id_)
+                blog.update(**validated_dict)
+
+
+            db.session.commit()
+
+
+        return lab11_db_blog()
+    return app.send_static_file('lab11_microblog.html')
+
+@app.route("/lab11/blog")
+def lab11_db_blog():
     blogEntry = []
     db_blogEntry = BlogEntry.query.all()
 
@@ -102,3 +151,17 @@ def lab04_db_blog():
 
     return jsonify(blogEntry)
 
+@app.route('/lab11/remove_blog', methods=('GET', 'POST'))
+def lab11_remove_blog():
+    app.logger.debug("LAB11 - REMOVE")
+    if request.method == 'POST':
+        result = request.form.to_dict()
+        id_ = result.get('id', '')
+        try:
+            blog = BlogEntry.query.get(id_)
+            db.session.delete(blog)
+            db.session.commit()
+        except Exception as ex:
+            app.logger.debug(ex)
+            raise
+    return lab11_db_blog()
