@@ -42,7 +42,7 @@
             <img class="tw-logo" src="static/img/twitterlogo.png"> &nbsp;
             <form class="form-inline">
                 <input class="form-control" id="nav-search" type="search" placeholder="Search Twitter"> &nbsp;
-                <img class="tw-user-small rounded-circle" src="static/img/kuromii.jpg"> &nbsp;
+                <img class="tw-user-small rounded-circle" src="static/img/profile-picture.png"> &nbsp;
 
                 <button class="btn" id="nav-tweet-btn" type="submit">Tweet</button>
             </form>
@@ -58,7 +58,8 @@
                     </a>
                     <div>
                         <a href="#" class="profile-link">
-                            <img src="static/img/kuromii.jpg" class="tw-user-small1 rounded-circle mx-auto d-block">
+                            <img src="static/img/profile-picture.png"
+                                class="tw-user-small1 rounded-circle mx-auto d-block">
                         </a>
                         <div class="profile-marg">
                             <div class="profile-name">
@@ -168,7 +169,8 @@
                     <div class="new-tweet-row">
                         <div class="row">
                             <div class="col-md-2">
-                                <img src="static/img/kuromii.jpg" class="tw-user-small rounded-circle mx-auto d-block">
+                                <img src="static/img/profile-picture.png"
+                                    class="tw-user-small rounded-circle mx-auto d-block">
                             </div>
                             <div class="col-md-9">
 
@@ -191,7 +193,7 @@
                     </div>
                     &nbsp;
                     <div class="contentbox-box" id="demo">
-            
+
                     </div>
 
                 </div>
@@ -199,17 +201,26 @@
 
             <div id="right_3" class="col-md-3">
                 <div class="content-box">
-                    <ul class="follow">
-                        <li class="trend-country">Who to follow</li>
-                        <li class="c">Refresh</li>
-                        <li class="c">View All</li>
-                    </ul>
+                    <p class="follow1">Who to follow</p>
+                    <div class="box"><img class="tw-user-small2 rounded-circle" src="static/img/camela.png"
+                            align="left" />
+                        <p id="text">Camelaa_123</p>
+                    </div>
+                    <div class="box"><img class="tw-user-small2 rounded-circle" src="static/img/sailor-moon.jpeg"
+                            align="left" />
+                        <p id="text">PungPung</p>
+                    </div>
+                    <div class="box"><img class="tw-user-small2 rounded-circle" src="static/img/book.jpg"
+                            align="left" />
+                        <p id="text">BookforFunn</p>
+                    </div>
+                    <div class="box"><img class="tw-user-small2 rounded-circle" src="static/img/dogcute.jpg"
+                            align="left" />
+                        <p id="text">Dogsocute</p>
+                    </div>
                 </div>
-
             </div>
-
         </div>
-    </div>
 </body>
 
 
@@ -221,7 +232,8 @@
         console.log(contact_data);
 
         let output = ``
-        contact_data.forEach( element => {console.log(element)
+        contact_data.forEach(element => {
+            console.log(element)
             console.log(element)
             console.log(element.id)
 
@@ -233,7 +245,7 @@
             <div class="tweet">
                 <div class="row">
                     <div class="col-md-2 text-center">
-                        <img class="tw-user-medium rounded-circle" src="static/img/kuromii.jpg">
+                        <img class="tw-user-medium rounded-circle" src="static/img/profile-picture.png">
                     </div>
 
                     <div class="col-md-10">
@@ -333,36 +345,33 @@
         clearForm();
         toggleView();
     });
-    
-    
+
+
 
 
     function prePopulateForm(id) {
         console.log(id)
         $('#addNewTweet')[0].reset();
-        $('#name').val(document.getElementById("username"+id).innerHTML);
-        $('#message').val(document.getElementById("messages"+id).innerHTML);
-        $('#mail').val(document.getElementById("e_mail"+id).innerHTML);
+        $('#name').val(document.getElementById("username" + id).innerHTML);
+        $('#message').val(document.getElementById("messages" + id).innerHTML);
+        $('#mail').val(document.getElementById("e_mail" + id).innerHTML);
         $('#entryid').val(id);
         console.log(id)
-        
+
         toggleView();
 
     }
-
-
-
     function removeItem(id) {
-        
+
         if (!confirm("Delete " + '?')) {
-          return false;
+            return false;
         }
         var url = "/lab11/remove_blog"
         var formData = { 'id': id };
         $.post(url, formData, function (contact_data) {
-          populate_post(contact_data);
+            populate_post(contact_data);
         });
-      }
+    }
 
 
 

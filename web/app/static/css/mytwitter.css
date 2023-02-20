@@ -1,32 +1,44 @@
-
 body {
-    background-color: #e7ecf0;
+    background-color: #ebe4e7;
 }
- 
+
 nav {
     background-color: #ffffff;
     border-bottom: 1px solid #adb1b4;
     margin-bottom: 10px;
 }
-img.tw-logo{
+
+img.tw-logo {
     height: 35px;
 }
+
 img.tw-user-small {
     height: 40px;
 }
+
 img.tw-user-small1 {
     height: 65px;
+    margin-left: 10px;
+    float: left;
+
+}
+
+img.tw-user-small2 {
+    margin-left: 10px;
+    display: inline;
+    width: 50px;
+    height: 50px;
 }
 
 img.tw-user-medium {
     height: 50px;
 }
- 
+
 #nav-search {
     border-radius: 20px;
     background-color: #e7ecf0
 }
- 
+
 #nav-tweet-btn {
     border-radius: 20px;
     background-color: #67b1f9;
@@ -34,12 +46,12 @@ img.tw-user-medium {
 }
 
 .content-box {
-    
+
     margin-bottom: 20px;
     background: #ffffff none repeat scroll 0 0;
     border: 1px solid #e1e8ed;
     border-radius: 6px;
-    
+
 }
 
 .new-tweet-row {
@@ -48,27 +60,29 @@ img.tw-user-medium {
     padding-bottom: 10px;
 }
 
+
 .tweet {
     background-color: #ffffff;
     padding-top: 10px;
     padding-bottom: 10px;
     border-bottom: 1px solid #edf1f4;
 }
- 
+
 .tweet-username {
     font-weight: bold;
 }
- 
+
 .tweet-arrow {
     padding-right: 25px;
 }
 
- 
+
 .tweet-text,
 .tweet-media {
     padding-right: 10px;
 }
-.profile{
+
+.profile {
     background: #ffffff none repeat scroll 0 0;
     border: 1px solid #e1e8ed;
     border-radius: 6px;
@@ -78,7 +92,8 @@ img.tw-user-medium {
     margin-bottom: 10px;
 
 }
-.profile-bg{
+
+.profile-bg {
     background-image: url("https://digitalagemag.com/wp-content/uploads/2019/04/Guide-to-Branding-Your-Business-on-Twitter.png");
     background-position: 0 50%;
     background-size: 100% auto;
@@ -86,8 +101,9 @@ img.tw-user-medium {
     height: 95px;
     width: 100%;
 }
-.profile-link{
-    
+
+.profile-link {
+
     border-radius: 6px;
     display: inline-block;
     float: left;
@@ -96,25 +112,39 @@ img.tw-user-medium {
     padding: 1px;
     vertical-align: bottom;
 }
-.profile-pic{
+
+
+#follow {
+    margin-top: 10px;
+    margin-left: 15px;
+    margin-bottom: 10px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.profile-pic {
     border: 2px solid #ffffff;
     border-radius: 7px;
     color: #ffffff;
     height: 90px;
     width: 90px;
 }
-.profile-marg{
+
+.profile-marg {
     margin: 5px 0px 0px;
 }
-.profile-name{
+
+.profile-name {
     font-size: 18px;
     font-weight: 700;
     line-height: 21px;
 }
-.profile-state{
+
+.profile-state {
     padding: 15px;
 }
-.profile-arrange{
+
+.profile-arrange {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -122,44 +152,52 @@ img.tw-user-medium {
     min-width: 100%;
     padding: 0px;
 }
-ul.profile-arrange{
+
+ul.profile-arrange {
     list-style: none;
     margin: 0;
     padding: 0;
 }
-.profile-details a:hover{
+
+.profile-details a:hover {
     text-decoration: none;
 }
-.profile-number{
+
+.profile-number {
     display: block;
     font-size: 18px;
     font-weight: 500;
     transition: color 0.15s ease-in-out 0s;
 }
-.profile-label{
+
+.profile-label {
     color: #3e4143;
     font-size: 10px;
     letter-spacing: 0.02em;
     overflow: hidden;
     text-transform: uppercase;
 }
-.name{
+
+.name {
     color: #3e4143;
     background-color: transparent;
     text-decoration: none;
 }
-.trends-marg{
-    
+
+.trends-marg {
+
     margin-left: 10px;
     margin-right: 10px;
-   
+
 }
-.trends-name{
+
+.trends-name {
     font-size: 18px;
     font-weight: 700;
     line-height: 21px;
 }
-.trend-country{
+
+.trend-country {
     list-style: none;
     padding-left: 1px;
     margin-left: -30px;
@@ -168,33 +206,39 @@ ul.profile-arrange{
     font-weight: bold;
     margin-bottom: 10px;
 }
-ul.change li{
-    
+
+ul.change li {
+
     float: left;
     padding: 0;
-    
+
 }
-.c{
+
+.c {
     color: #67b1f9;
     margin-left: 20px;
     margin-top: 21px;
     font-size: 10px;
 }
-.t{
+
+.t {
     font-size: 15px;
     background-color: transparent;
     text-decoration: none;
-    
+
 }
-.t1{
+
+.t1 {
     font-size: 14px;
     color: #565859;
     background-color: transparent;
     text-decoration: none;
 }
-.add-tweet{
+
+.add-tweet {
     color: #3e4143;
 }
+
 input[type=text],
 input[type=email],
 select,
@@ -208,9 +252,11 @@ textarea {
     margin-bottom: 16px;
     resize: vertical;
 }
-label{
+
+label {
     width: 100px;
 }
+
 button {
     border-radius: 20px;
     border: #ffffff;
@@ -219,23 +265,25 @@ button {
     padding: 10px;
     margin-left: 10px;
     width: 100px;
-    
+
 }
 
 
-input[type=submit]{
+input[type=submit] {
     border-radius: 20px;
-    border:#ffffff;
+    border: #ffffff;
     background-color: #FFB6C1;
     color: #ffffff;
     padding: 10px;
     width: 100px;
-    
-    
+
+
 }
-.new-tweet{
+
+.new-tweet {
     margin-top: 10px;
 }
+
 button[id=edit] {
     margin-top: 10px;
     margin-right: 10px;
@@ -243,6 +291,7 @@ button[id=edit] {
     width: 50px;
     padding-right: 10px;
 }
+
 button[id=remove] {
     margin-top: 10px;
     margin-right: 10px;
@@ -251,6 +300,7 @@ button[id=remove] {
     padding-right: 10px;
     float: left;
 }
+
 button[id=like] {
     margin-top: 10px;
     margin-right: 10px;
@@ -259,6 +309,7 @@ button[id=like] {
     padding-right: 10px;
     float: left;
 }
+
 button[id=retweet] {
     margin-top: 10px;
     margin-right: 10px;
@@ -268,13 +319,31 @@ button[id=retweet] {
     float: left;
 }
 
-button[id=new-tweet]{
+button[id=new-tweet] {
     background-color: #FFB6C1;
-    
+
 }
-.remove{
+
+.remove {
     padding-right: 25px;
 }
 
 
+#text {
+    margin-top: 40px;
+    display: inline;
+    font-size: 15px;
+    margin-left: 10px;
+}
 
+.follow1 {
+    font-size: 20px;
+    margin-top: 10px;
+    margin-left: 10px;
+    font-weight: bold;
+}
+
+.box {
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
