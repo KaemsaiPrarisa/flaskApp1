@@ -177,11 +177,12 @@
                                 <form id="addNewTweet" hidden="hidden">
                                     <h3 class="tweets" id="add-tweet">Add new tweet</h3>
                                     <label for="name">Name</label>
-                                    <input type="text" id="name" name="name" placeholder="Your name...">
+                                    <input type="text" id="name" name="name" placeholder="Your name..." required>
                                     <label for="message">Message</label>
-                                    <textarea id="message" name="message" placeholder="Type your message..."></textarea>
+                                    <textarea id="message" name="message" placeholder="Type your message..."
+                                        required></textarea>
                                     <label for="email">Email</label>
-                                    <input type="email" id="mail" name="email" placeholder="Your email...">
+                                    <input type="email" id="mail" name="email" placeholder="Your email..." required>
                                     <input type="hidden" id="entryid" name="id" value="">
                                     <input type="submit" id="submit" name="submit" value="Tweet">
                                     <button id="clear" type="button">Clear</button>
@@ -241,7 +242,7 @@
             var offset = date.getTimezoneOffset();
             const db_date = new Date((Date.parse(element.date_created) - (offset * 60 * 1000))).toLocaleString("th-TH")
             var id = element.id
-            output += `
+            output = `
             <div class="tweet">
                 <div class="row">
                     <div class="col-md-2 text-center">
@@ -275,10 +276,11 @@
 
                 </div>
             </div>
-            `
+            ` + output;
 
         });
         document.getElementById("demo").innerHTML = output;
+
     }
 
     $(document).ready(function () {
@@ -314,7 +316,7 @@
         $.post(url, formData, function (contact_data) {
             //refresh_table(contact_data);
             populate_post(contact_data);
-            clearForm();
+            clearFormNew()
         });
         toggleView()
     });
@@ -332,9 +334,13 @@
         $('#addNewTweet')[0].reset();
         $('#entryid').val('');
     }
+    function clearFormNew() {
+        $('#message').val('');
+        $('#entryid').val('');
+    }
 
     $("#new-tweet").click(function () {
-        clearForm();
+        clearFormNew();
         toggleView();
     });
     $("#clear").click(function () {
@@ -342,7 +348,7 @@
     });
 
     $("#cancel").click(function () {
-        clearForm();
+        clearFormNew();
         toggleView();
     });
 

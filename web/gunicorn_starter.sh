@@ -2,6 +2,7 @@
 
 
 if [ "$APP_ENV" = "development" ]; then
+   
     
     echo "Creating the database tables..."
     python3 manage.py create_db
