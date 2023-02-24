@@ -152,7 +152,7 @@ def lab11_microblogs():
 
 
         return lab11_db_blog()
-    return app.send_static_file('lab11_microblog.html')
+    return render_template('lab12/lab11_microblog.html')
 
 @app.route("/lab11/blog")
 def lab11_db_blog():
@@ -173,13 +173,15 @@ def lab10_remove_contact():
     if request.method == 'POST':
         result = request.form.to_dict()
         id_ = result.get('id', '')
-        try:
-            contact = Contact.query.get(id_)
-            db.session.delete(contact)
-            db.session.commit()
-        except Exception as ex:
-            app.logger.debug(ex)
-            raise
+        contact = PrivateContact.query.get(id_)
+        if contact.owner_id == current_user.id:
+            try:
+                contact = Contact.query.get(id_)
+                db.session.delete(contact)
+                db.session.commit()
+            except Exception as ex:
+                app.logger.debug(ex)
+                raise
     return lab10_db_contacts()
 
 @app.route('/lab11/remove_blog', methods=('GET', 'POST'))
@@ -188,13 +190,15 @@ def lab11_remove_blog():
     if request.method == 'POST':
         result = request.form.to_dict()
         id_ = result.get('id', '')
-        try:
-            blog = BlogEntry.query.get(id_)
-            db.session.delete(blog)
-            db.session.commit()
-        except Exception as ex:
-            app.logger.debug(ex)
-            raise
+        contact = PrivateContact.query.get(id_)
+        if contact.owner_id == current_user.id:
+            try:
+                blog = BlogEntry.query.get(id_)
+                db.session.delete(blog)
+                db.session.commit()
+            except Exception as ex:
+                app.logger.debug(ex)
+                raise
     return lab11_db_blog()
 
 
@@ -266,8 +270,6 @@ def lab12_signup():
 
         return redirect(url_for('lab12_login'))
     return render_template('lab12/signup.html')
-
-
 
 
 def gen_avatar_url(email, name):
