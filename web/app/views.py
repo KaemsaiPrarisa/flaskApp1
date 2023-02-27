@@ -6,13 +6,14 @@ from app import app
 from app import db
 from app.models.contact import Contact
 from app.models.blog import BlogEntry
+from app.models.authuser import AuthUser
 import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.urls import url_parse
 from flask_login import login_user, login_required, logout_user, current_user
 
 from app import login_manager
-from app.models.authuser import AuthUser, PrivateContact
+from app.models.authuser import AuthUser, PrivateContact, PrivateBlog
 
 
 @login_manager.user_loader
@@ -105,12 +106,14 @@ def lab10_db_contacts():
     return jsonify(contacts)
 
 @app.route('/lab11')
+
 def lab11_microblog():
-    return app.send_static_file('lab11_microblog.html')
+    return render_template('lab12/lab11_microblog.html')
 
 
 
 @app.route('/lab11', methods=('GET', 'POST'))
+@login_required
 def lab11_microblogs():
     if request.method == 'POST':
         result = request.form.to_dict()
@@ -136,15 +139,17 @@ def lab11_microblogs():
 
 
         if validated:
+            validated_dict['owner_id'] = current_user.id
             app.logger.debug('validated dict: ' + str(validated_dict))
             # if there is no id: create a new contact entry
             if not id_:
-                entry = BlogEntry(**validated_dict)
+                entry = PrivateBlog(**validated_dict)
                 app.logger.debug(str(entry))
                 db.session.add(entry)
             # if there is an id already: update the contact entry
             else:
-                blog = BlogEntry.query.get(id_)
+                
+                blog = PrivateBlog.query.get(id_)
                 blog.update(**validated_dict)
 
 
@@ -157,14 +162,24 @@ def lab11_microblogs():
 @app.route("/lab11/blog")
 def lab11_db_blog():
     blogEntry = []
-    db_blogEntry = BlogEntry.query.all()
-
-
+    db_blogEntry = PrivateBlog.query.order_by(BlogEntry.date_created.desc()).all()
     blogEntry = list(map(lambda x: x.to_dict(), db_blogEntry))
     app.logger.debug("DB BlogEntry: " + str(blogEntry))
 
 
     return jsonify(blogEntry)
+
+@app.route("/lab11/authuser")
+def lab11_db_AuthUser():
+    auth_users = []
+    db_auth_users = AuthUser.query.all()
+
+    
+    auth_users = list(map(lambda x: x.to_dict(), db_auth_users))
+    app.logger.debug("DB auth_users: " + str(auth_users))
+
+
+    return jsonify(auth_users)
 
 @app.route('/lab10/remove_contact', methods=('GET', 'POST'))
 @login_required
@@ -190,7 +205,7 @@ def lab11_remove_blog():
     if request.method == 'POST':
         result = request.form.to_dict()
         id_ = result.get('id', '')
-        contact = PrivateContact.query.get(id_)
+        contact = PrivateBlog.query.get(id_)
         if contact.owner_id == current_user.id:
             try:
                 blog = BlogEntry.query.get(id_)
@@ -327,6 +342,67 @@ def lab12_login():
 
     return render_template('lab12/login.html')
 
+@app.route('/lab12/edit', methods=('GET', 'POST'))
+@login_required
+def lab12_edit():
+
+    
+    app.logger.debug(AuthUser.query.all())
+    app.logger.debug(PrivateBlog.query.all())
+    db_auth_users = AuthUser.query.all()
+    
+    
+    db_contacts = PrivateBlog.query.all()
+    contacts = list(map(lambda x: x.to_dict(), db_contacts))
+    app.logger.debug(contacts)
+    if request.method == 'POST':
+        result = request.form.to_dict()
+        app.logger.debug(str(result))
+ 
+        validated = True
+        validated_dict = {}
+        valid_keys = ['email', 'name', 'password']
 
 
 
+        # validate the input
+        for key in result:
+            app.logger.debug(str(key)+": " + str(result[key]))
+            # screen of unrelated inputs
+            if key not in valid_keys:
+                continue
+
+
+            value = result[key].strip()
+            if not value or value == 'undefined':
+                validated = False
+                break
+            validated_dict[key] = value
+
+        if validated:
+            app.logger.debug('validated dict: ' + str(validated_dict))
+            email = validated_dict['email']
+            name = validated_dict['name']
+            password = validated_dict['password']
+
+            auth_users = AuthUser.query.get(current_user.id)
+            validated_dict['password'] = generate_password_hash(password, method='sha256')
+            avatar_url = gen_avatar_url(email, name)
+            validated_dict['avatar_url'] = avatar_url
+            # add the new user to the database
+            auth_users.update(**validated_dict)
+            db.session.commit()
+            app.logger.debug('validated dict: ' + str(AuthUser.query.get(current_user.id)))
+        return redirect(url_for('lab12_profile'))
+    return render_template('lab12/edit.html')
+
+@app.route('/lab12/password', methods=('GET', 'POST'))
+@login_required
+def lab12_password():
+    if request.method == 'POST':
+        password = request.form.get('password')
+        if not check_password_hash(current_user.password, password):
+            flash('Please check your password is it correct.')
+            return render_template('lab12/password.html')
+        return redirect(url_for('lab12_edit'))
+    return render_template('lab12/password.html')

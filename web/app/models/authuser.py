@@ -7,7 +7,7 @@ from .blog import BlogEntry
 
 
 
-class AuthUser(db.Model, UserMixin):
+class AuthUser(db.Model, UserMixin, SerializerMixin):
     __tablename__ = "auth_users"
     # primary keys are required by SQLAlchemy
     id = db.Column(db.Integer, primary_key=True)
@@ -18,6 +18,12 @@ class AuthUser(db.Model, UserMixin):
 
 
     def __init__(self, email, name, password, avatar_url):
+        self.email = email
+        self.name = name
+        self.password = password
+        self.avatar_url = avatar_url
+        
+    def update(self, email, name, password, avatar_url):
         self.email = email
         self.name = name
         self.password = password
@@ -36,5 +42,11 @@ class PrivateBlog(BlogEntry, UserMixin, SerializerMixin):
 
 
     def __init__(self, name, message, email, owner_id):
-        super().__init__(name, message, )
+        super().__init__(name, message, email)
         self.owner_id = owner_id
+    def update(self, name, message, email, owner_id):
+        super().__init__(name, message, email)
+        self.owner_id = owner_id
+    
+    
+    

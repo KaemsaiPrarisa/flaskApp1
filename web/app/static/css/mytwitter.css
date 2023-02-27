@@ -3,7 +3,7 @@ body {
 }
 
 nav {
-    background-color: #ffffff;
+    background-color: #EAAAAE;
     border-bottom: 1px solid #adb1b4;
     margin-bottom: 10px;
 }
@@ -42,6 +42,11 @@ img.tw-user-medium {
 #nav-tweet-btn {
     border-radius: 20px;
     background-color: #67b1f9;
+    color: #ffffff;
+}
+#nav-tweet-btn1{
+    border-radius: 20px;
+    background-color: #D589EB;
     color: #ffffff;
 }
 
@@ -91,6 +96,9 @@ img.tw-user-medium {
     max-width: 340px;
     margin-bottom: 10px;
 
+}
+.profile-marg{
+    padding-bottom: 10px;
 }
 
 .profile-bg {

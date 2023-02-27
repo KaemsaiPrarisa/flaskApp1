@@ -30,6 +30,7 @@
 </body>
 
 <body>
+    <p id="current_id" hidden="hidden">{{current_user.id}}</p>
     <nav class="navbar navbar-expand-md navbar-light">
         <div class="container">
             <div class="navbar-nav">
@@ -39,12 +40,15 @@
                 <a class="nav-item nav-link" href="#"><span class="oi oi-envelope-open"></span> Messages</a>
             </div>
 
-            <img class="tw-logo" src="static/img/twitterlogo.png"> &nbsp;
+            
             <form class="form-inline">
                 <input class="form-control" id="nav-search" type="search" placeholder="Search Twitter"> &nbsp;
-                <img class="tw-user-small rounded-circle" src="static/img/profile-picture.png"> &nbsp;
-
+                <img class="tw-user-small rounded-circle" src="{{current_user.avatar_url}}"> &nbsp;
+                
                 <button class="btn" id="nav-tweet-btn" type="submit">Tweet</button>
+            
+                <button class="btn" id="nav-tweet-btn1" type="submit" formaction="/lab12">Logout</button>
+                
             </form>
         </div>
     </nav>
@@ -58,39 +62,18 @@
                     </a>
                     <div>
                         <a href="#" class="profile-link">
-                            <img src="static/img/profile-picture.png"
+                            <img src="{{current_user.avatar_url}}"
                                 class="tw-user-small1 rounded-circle mx-auto d-block">
                         </a>
                         <div class="profile-marg">
                             <div class="profile-name">
-                                <a href="#" class="name">Kaemsai Prarisa</a>
+                                <a href="#" class="name">{{current_user.name}}</a>
                             </div>
                             <span>
-                                <a href="#" class="name">@<span>ksprarisa</span></a>
+                                <a href="#" class="name"><span>{{current_user.email}}</span></a>
                             </span>
                         </div>
-                        <div class="profile-state">
-                            <ul class="profile-arrange">
-                                <li class="profile-details">
-                                    <a href="#">
-                                        <span class="profile-label d-block">Tweets</span>
-                                        <span class="profile-number">10</span>
-                                    </a>
-                                </li>
-                                <li class="profile-details">
-                                    <a href="#">
-                                        <span class="profile-label d-block">Following</span>
-                                        <span class="profile-number">256</span>
-                                    </a>
-                                </li>
-                                <li class="profile-details">
-                                    <a href="#">
-                                        <span class="profile-label d-block">Followers</span>
-                                        <span class="profile-number">327</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
+                        
                     </div>
                 </div>
                 <div class="content-box">
@@ -169,7 +152,7 @@
                     <div class="new-tweet-row">
                         <div class="row">
                             <div class="col-md-2">
-                                <img src="static/img/profile-picture.png"
+                                <img src="{{current_user.avatar_url}}"
                                     class="tw-user-small rounded-circle mx-auto d-block">
                             </div>
                             <div class="col-md-9">
@@ -177,18 +160,20 @@
                                 <form id="addNewTweet" hidden="hidden">
                                     <h3 class="tweets" id="add-tweet">Add new tweet</h3>
                                     <label for="name">Name</label>
-                                    <input type="text" id="name" name="name" placeholder="Your name..." required>
+                                    <input type="text" id="name" name="name" value="{{current_user.name}}" required>
                                     <label for="message">Message</label>
                                     <textarea id="message" name="message" placeholder="Type your message..."
                                         required></textarea>
                                     <label for="email">Email</label>
-                                    <input type="email" id="mail" name="email" placeholder="Your email..." required>
+                                    <input type="email" id="mail" name="email" value="{{current_user.email}}" required>
                                     <input type="hidden" id="entryid" name="id" value="">
                                     <input type="submit" id="submit" name="submit" value="Tweet">
                                     <button id="clear" type="button">Clear</button>
                                     <button id="cancel" type="button">Cancel</button>
                                 </form>
+                                {% if current_user.is_authenticated %}
                                 <button id="new-tweet" type="button">+ Tweet</button>
+                                {%endif%}
                             </div>
                         </div>
                     </div>
@@ -229,55 +214,82 @@
 <!-- Optional JavaScript -->
 <script>
 
+    let data_user = [];
+    let data_blog = [];
+    var current_id = document.getElementById("current_id");
+    var current_id = current_id.innerText;
+
+    $.getJSON("/lab11/authuser", function (Array_data_user){
+        Array_data_user.forEach(item => {
+            let dict = {};
+            dict['avatar_url'] = item.avatar_url;
+            dict['email'] = item.email;
+            dict['id'] = item.id;
+            dict['name'] = item.name;
+            dict['password'] = item.password;
+            data_user.push(dict);
+        })
+    });
+    
+
     function populate_post(contact_data) {
-        console.log(contact_data);
+        //console.log(contact_data);
 
         let output = ``
         contact_data.forEach(element => {
-            console.log(element)
-            console.log(element)
-            console.log(element.id)
+            console.log(element.name)
+            
 
             var date = new Date();
             var offset = date.getTimezoneOffset();
             const db_date = new Date((Date.parse(element.date_created) - (offset * 60 * 1000))).toLocaleString("th-TH")
-            var id = element.id
-            output = `
+            var image = "";
+            var nameupdate = "";
+            var emailupdate = "";
+
+            let editdelete = `<button id="edit" type="button" value="${element.id}" onclick="prePopulateForm(this.value)">✏️</button>
+            <button id="remove" type="button" value="${element.id}" onclick="removeItem(this.value)">🗑️</button>`;
+            for (let i = 0; i < data_user.length; i++){
+                if (element.owner_id == data_user[i].id){
+                    image = data_user[i].avatar_url;
+                    nameupdate = data_user[i].name;
+                    emailupdate = data_user[i].email;
+                    console.log(image);
+                    break;
+                }
+            }
+            if ("{{current_user.id}}" != element.owner_id){
+                editdelete= "";
+            }
+            output += `
             <div class="tweet">
                 <div class="row">
                     <div class="col-md-2 text-center">
-                        <img class="tw-user-medium rounded-circle" src="static/img/profile-picture.png">
+                        <img class="tw-user-medium rounded-circle" src="${image}">
                     </div>
-
                     <div class="col-md-10">
                         <div class="row tweet-info">
                             <div class="col-md-auto">
-                                <span class="tweet-username" id="username${id}">${element.name}</span>
-                                <span class="tweet-email" id="e_mail${id}">${element.email}</span>-
+                                <span class="tweet-username" id="username">${nameupdate}</span>
+                                <span class="tweet-email" id="e_mail">${emailupdate}</span>-
                                 <span class="tweet-age text-muted">${db_date}</span>
-                                <span class="tweet-id" hidden="hidden"></span>
+                                <span class="tweet-id" hidden="hidden">${element.owner_id}</span>
                             </div>
                         </div>
-
-                        <div class="tweet-text" id="messages${id}">
+                        <div class="tweet-text" id="messages">
                             ${element.message}
                         </div>
                         <div class="row text-muted">
                             
                             <button id="retweet" type="button"><span class="oi oi-loop-circular"></span></botton>
                             <button id="like" type="button">❤️</button>
-                            <button id="edit" type="button" onclick="prePopulateForm(${element.id})">✏️</button>
-                            <button id="remove" type="button" onclick="removeItem(${element.id})">🗑️</button>
-                            
-                            
+                            ${editdelete}
                         </div>
                         
                     </div>
-
                 </div>
             </div>
-            ` + output;
-
+            ` 
         });
         document.getElementById("demo").innerHTML = output;
 
@@ -311,6 +323,7 @@
         var $form = $(this);
         var url = $form.attr("action");
 
+        console.log(formData);
 
         // make a POST call to the back end w/ a callback to refresh the table
         $.post(url, formData, function (contact_data) {
@@ -320,6 +333,55 @@
         });
         toggleView()
     });
+     
+    $.getJSON("/lab11/blog", function(Array_data_blog){
+        Array_data_blog.forEach(element =>{
+            let dict = {};
+            dict['date_created'] = element.date_created;
+            dict['email'] = element.email;
+            dict['id'] = element.id;
+            dict['name'] = element.name;
+            dict['message'] = element.message;
+            dict['owner_id'] = element.owner_id;
+            data_blog.push(dict);
+
+        });
+    });
+    function prePopulateForm(id) {
+        var newname = '';
+        var newemail = '';
+        var newmessage = '';
+        for (let i = 0; i < data_blog.length; i++){
+            if(id == data_blog[i].id){
+                newname = data_blog[i].name;
+                newemail = data_blog[i].email;
+                newmessage = data_blog[i].message;
+                break;
+            }
+        }
+        console.log(id)
+        console.log(document.getElementById("username" + id))
+        document.documentElement.scrolltop = 0;
+        $('#addNewTweet')[0].reset();
+        $('#name').val(newname);
+        $('#message').val(newmessage);
+        $('#mail').val(newemail);
+        $('#entryid').val(id);
+        
+        toggleView();
+
+    }
+    function removeItem(id) {
+
+        if (!confirm("Delete " + '?')) {
+            return false;
+        }
+        var url = "/lab11/remove_blog"
+        var formData = { 'id': id };
+        $.post(url, formData, function (id) {
+            populate_post(id);
+        });
+    }
 
     function toggleView() {
         if ($('#addNewTweet').attr('hidden')) {
@@ -355,29 +417,8 @@
 
 
 
-    function prePopulateForm(id) {
-        console.log(id)
-        $('#addNewTweet')[0].reset();
-        $('#name').val(document.getElementById("username" + id).innerHTML);
-        $('#message').val(document.getElementById("messages" + id).innerHTML);
-        $('#mail').val(document.getElementById("e_mail" + id).innerHTML);
-        $('#entryid').val(id);
-        console.log(id)
-
-        toggleView();
-
-    }
-    function removeItem(id) {
-
-        if (!confirm("Delete " + '?')) {
-            return false;
-        }
-        var url = "/lab11/remove_blog"
-        var formData = { 'id': id };
-        $.post(url, formData, function (contact_data) {
-            populate_post(contact_data);
-        });
-    }
+    
+    
 
 
 

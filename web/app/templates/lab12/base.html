@@ -31,10 +31,12 @@
               <a href="{{ url_for('lab12_profile') }}" class="navbar-item">
                 Profile
               </a>
-              <a href="{{ url_for('lab10_phonebook') }}" class="navbar-item">
-                Phonebook
-              </a>
+              
+              
               {% endif %}
+              <a href="{{ url_for('lab11_microblogs') }}" class="navbar-item">
+                Microblog
+              </a>
             </div>
             <div class="navbar-end">
               {% if not current_user.is_authenticated %}
@@ -49,6 +51,10 @@
               <a href="{{ url_for('lab12_logout') }}" class="navbar-item">
                 Logout
               </a>
+              <a href="{{ url_for('lab12_password') }}" class="navbar-item">
+                Edit
+              </a>
+              
               {% endif %}
             </div>
           </div>
